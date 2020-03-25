@@ -1,0 +1,25 @@
+div.card {
+    border: solid 1px darkgray;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+h1 {
+    text-shadow: 1px 1px 3px red, 2px 2px 5px blue, 3px 3px 7px white, 4px 4px 9px black, 5px 5px 11px green;
+    letter-spacing: 10px;
+}
+
+.recharts-wrapper {
+    margin : 0 auto;
+}
+
+.overlay {
+    position: absolute;
+    z-index: 2;
+    opacity: 1;
+    margin: 0;
+    width: 100%;
+}
+
+.jumbotron {
+    background-color: #2b363b!important;
+}
