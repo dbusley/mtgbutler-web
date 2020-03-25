@@ -34,10 +34,8 @@ export default class CardTable extends React.Component {
     return (
       <div className={'row'}
         style={this.state.loading ? {opacity: 0.1} : {opacity: 1}}>
-        <div id={'searchForm'} className={'col-lg-3'}>
-        <div className={'row'}>
-        <div className={'col-lg-3 position-fixed'} style={{height: '100%'}}>
-          <div className={'mx-2 my-2 card'} style={{height: '50%'}}>
+        <div className={'col-lg-3 sticky-top'} style={{height: '0px'}}>
+          <div className={'mx-2 my-2 card'}>
           <Form onSubmit={this.handleSubmit} className={'my-4 mx-4'}>
             <FormGroup controlId={'formCardSearch'}>
               <Form.Label>Card name</Form.Label>
@@ -68,8 +66,6 @@ export default class CardTable extends React.Component {
             </Button>
           </Form>
           </div>
-        </div>
-        </div>
         </div>
         <div className={'col-lg-9'}>
           <div className={'row'}>
