@@ -2,6 +2,7 @@ import React from 'react';
 import client from '../client';
 import Layout from '../components/Layout';
 import App from '../components/App';
+import ReactGA from 'react-ga';
 
 const Index = (props) => <Layout><App data={props.data} /></Layout>;
 

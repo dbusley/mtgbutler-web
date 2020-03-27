@@ -1,6 +1,12 @@
 import React from 'react';
 import BounceLoader from 'react-spinners/BounceLoader';
-import CardTable from "./CardTable";
+import CardTable from './CardTable';
+import * as Sentry from '@sentry/browser';
+import ReactGA from 'react-ga';
+
+Sentry.init({
+  dsn: 'https://51062c99acf742718df40413e67ec1da@sentry.io/5176937',
+});
 
 export default class App extends React.Component {
   /**

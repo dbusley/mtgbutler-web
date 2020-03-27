@@ -45,7 +45,6 @@ export default class PriceChart extends React.Component {
 }
 
 function formatDate(dateString) {
-  console.log(dateString);
   return moment(dateString, 'YYYY-MM-DD').toDate().toLocaleDateString('en-US');
 }
 
