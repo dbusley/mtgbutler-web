@@ -19,15 +19,15 @@ export default class CardTable extends React.Component {
 
   setLoading = () => {
     this.setState({loading: true});
-  }
+  };
 
   showMenu = () => {
     return this.state.menu ? "show" : "";
-  }
+  };
 
   hideMenu = () => {
     return this.state.menu ? "" : "show";
-  }
+  };
 
   constructor(props, context) {
     super(props, context);
@@ -113,7 +113,6 @@ export default class CardTable extends React.Component {
                 <div>
                     <button type={'button'} className={'btn btn-secondary my-4'}
                             onClick={async () => {
-                                this.setState({loading: true});
                                 var qs = {...this.state.data};
                                 delete qs.cards;
                                 qs.page = parseInt(qs.page);

@@ -1,12 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Head from 'next/head';
+import ReactGA from 'react-ga';
 
 /**
  * Consistent layout through entire site
  */
-export default (props) => (
+export default (props) => {
+  useEffect(() => {
+    if (!window.GA_INITIALIZED) {
+      ReactGA.initialize('UA-161990411-1');
+      window.GA_INITIALIZED = true;
+    }
+    ReactGA.set({page: window.location.pathname});
+    ReactGA.pageview(window.location.pathname);
+  }, []);
 
-  <div>
+  return (<div>
     <Head>
       <meta charSet="utf-8"/>
       <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
@@ -18,7 +27,7 @@ export default (props) => (
           "sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
         crossOrigin="anonymous"/>
       <title>MTG Butler</title>
-      <link rel={'icon'} href={'assets/favicon.png'} />
+      <link rel={'icon'} href={'assets/favicon.png'}/>
     </Head>
     <div className="container-fluid">
       <div className="jumbotron jumbotron-fluid text-center">
@@ -28,4 +37,6 @@ export default (props) => (
       <div id="app">
         {props.children}
       </div>
-    </div></div>);
+    </div>
+  </div>);
+};
