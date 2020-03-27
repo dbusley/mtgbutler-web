@@ -9,8 +9,8 @@ export default class Card extends React.Component {
 
   render() {
     const card = this.props.card;
-    const cardRow = <div className={'col-lg-4'}>
-      <div className={'mx-2 my-2 card'}>
+    const cardRow = <div className={'col-lg-4 col-md-6 col-sm-12'}>
+      <div className={'mx-2 mb-2 card'}>
         <div>
           <div className={'my-4 text-center'}>{card.name}</div>
         </div>
@@ -25,7 +25,7 @@ export default class Card extends React.Component {
           }).format(card.latestPrice)}</div>
         </div>
         <div className={'text-center'}><Link href={'/price?name='+card.name}>
-          <button type={'button'} className={'btn btn-secondary my-4'}>
+          <button type={'button'} className={'btn btn-secondary my-4'} onClick={this.props.setLoading}>
             Show Price History
           </button>
         </Link> </div>

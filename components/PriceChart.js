@@ -1,6 +1,8 @@
 import React from 'react';
 import {CartesianGrid, Line, LineChart,
   Tooltip, XAxis, YAxis, ResponsiveContainer} from 'recharts';
+import Router from 'next/router';
+import moment from 'moment';
 
 export default class PriceChart extends React.Component {
   constructor(props, context) {
@@ -13,27 +15,38 @@ export default class PriceChart extends React.Component {
   render() {
     const prices = this.state.prices._embedded.prices
         .sort((price, otherPrice) =>
-          new Date(price.reportedDate) - new Date(otherPrice.reportedDate));
+          moment(price.reportedDate, 'YYYY-MM-DD').toDate() -
+          moment(otherPrice.reportedDate, 'YYYY-MM-DD').toDate());
     return <div className={'row justify-content-md-center'}>
-      <ResponsiveContainer height={300} width="80%">
-        <LineChart
-          data={prices}
-          height={300}
-          width={800}>
-          <CartesianGrid strokeDasharray="3 3"/>
-          <XAxis dataKey="reportedDate" tickFormatter={formatDate}/>
-          <YAxis/>
-          <Tooltip labelFormatter={formatDate} formatter={formatCurrency}/>
-          <Line type="monotone" dataKey="value" stroke="#8884d8"
-            activeDot={{r: 8}}/>
-        </LineChart>
-      </ResponsiveContainer>
+      <div className={'col-lg-6'}>
+        <ResponsiveContainer height={300} width="100%" className={'card'}>
+          <LineChart
+            margin={{
+              top: 5, right: 30, left: 30, bottom: 5,
+            }}
+            data={prices}>
+            <CartesianGrid strokeDasharray="3 3"/>
+            <XAxis dataKey="reportedDate" tickFormatter={formatDate}/>
+            <YAxis/>
+            <Tooltip labelFormatter={formatDate} formatter={formatCurrency}/>
+            <Line type="monotone" dataKey="value" stroke="#8884d8"
+              activeDot={{r: 8}}/>
+          </LineChart>
+        </ResponsiveContainer>
+        <div className={'text-center'}>
+          <button type={'button'} className={'btn btn-secondary my-4'}
+            onClick={() => Router.back()}>
+            Go Back
+          </button>
+        </div>
+      </div>
     </div>;
   }
 }
 
 function formatDate(dateString) {
-  return new Date(dateString).toLocaleDateString('en-US');
+  console.log(dateString);
+  return moment(dateString, 'YYYY-MM-DD').toDate().toLocaleDateString('en-US');
 }
 
 function formatCurrency(currencyString) {
