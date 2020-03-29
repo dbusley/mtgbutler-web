@@ -1,8 +1,7 @@
 import express from 'express';
-import fetch from 'node-fetch';
 import next from 'next';
 import regeneratorRuntime from 'regenerator-runtime';
-import client from "./client";
+import client from './client';
 
 const dev = process.env.ENV !== 'production';
 const nextApp = next({dev});
