@@ -6,7 +6,7 @@ import {Form, FormGroup, Button, ButtonGroup} from 'react-bootstrap';
 import {useDispatch, useSelector} from 'react-redux';
 import allActions from '../redux/actions';
 
-export default (props) => {
+const CardTable = (props) => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loadingReducer.loading);
 
@@ -155,3 +155,5 @@ export default (props) => {
       </div>
     </div>);
 };
+
+export default CardTable;

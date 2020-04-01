@@ -6,7 +6,7 @@ import NavBar from './NavBar';
 /**
  * Consistent layout through entire site
  */
-export default (props) => {
+const Layout = (props) => {
   useEffect(() => {
     if (!window.GA_INITIALIZED) {
       ReactGA.initialize('UA-161990411-1');
@@ -42,3 +42,5 @@ export default (props) => {
     </div>
   </div>);
 };
+
+export default Layout;
