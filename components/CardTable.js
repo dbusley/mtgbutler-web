@@ -2,13 +2,20 @@ import React, {useEffect, useState} from 'react';
 import fetch from 'node-fetch';
 import Card from './Card';
 import Router from 'next/router';
-import BounceLoader from 'react-spinners/BounceLoader';
 import {Form, FormGroup, Button, ButtonGroup} from 'react-bootstrap';
+import {useDispatch, useSelector} from 'react-redux';
+import allActions from '../redux/actions';
 
 export default (props) => {
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.loadingReducer.loading);
+
   const [data, setData] = useState(props.data);
   const [menu, setMenu] = useState(false);
+
+  const determineOpacity = () => {
+    return {opacity: loading ? 0.1 : 1};
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,19 +60,14 @@ export default (props) => {
       return true;
     });
 
-    setLoading(false);
+    dispatch(allActions.loadingActions.doneLoading());
   }, [data]);
 
   const cards = data.cards._embedded.cards
-      .map((card) => <Card key={card.name} card={card}
-        setLoading={setLoading}/>);
+      .map((card) => <Card key={card.name} card={card} />);
+
   return (
-    <div className={'row'}
-      style={loading ? {opacity: 0.1} : {opacity: 1}}>
-      <div className={'col-md-12 text-center'}><BounceLoader
-        css={{margin: '0 auto'}}
-        loading={loading}/>
-      </div>
+    <div className={'row'} style={determineOpacity()}>
       <div className={'col-lg-12 sticky-top collapse ' + hideMenu()}>
         <button type={'button'} className={'btn btn-primary mb-4'}
           style={{width: '100%'}}

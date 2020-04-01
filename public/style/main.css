@@ -14,10 +14,16 @@ h1 {
 
 .overlay {
     position: absolute;
-    z-index: 2;
-    opacity: 1;
+    z-index: 9;
+    display: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 1!important;
     margin: 0;
     width: 100%;
+    height: 100%;
 }
 
 .jumbotron {
@@ -26,6 +32,11 @@ h1 {
 
 .container-fluid {
     background-color: #f2f3f3;
+}
+
+.bg-dark {
+    background-color: #2b363b;
+    color: #ffffff
 }
 
 body {

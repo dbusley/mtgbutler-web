@@ -1,13 +1,24 @@
 import React from 'react';
-import client from '../client';
+import {get} from '../client';
 import Layout from '../components/Layout';
 import App from '../components/App';
+import {createStore} from 'redux';
+import rootReducer from '../redux/reducers';
+import {Provider} from 'react-redux';
 
-const Index = (props) => <Layout><App data={props.data} /></Layout>;
+const store = createStore(
+    rootReducer,
+);
+
+const Index = (props) => <Provider store={store}>
+  <Layout>
+    <App data={props.data} />
+  </Layout>
+</Provider>;
 
 export async function getServerSideProps(context) {
   const qs = {sort: 'name', page: 0, ...context.req.query};
-  const data = await client('cards', qs);
+  const data = await get('cards', qs);
   return {props: {data: {cards: data, ...qs}}};
 }
 

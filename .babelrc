@@ -1,4 +1,4 @@
 {
   "presets": ["@babel/env", "@babel/react"],
-  "plugins": ["@babel/plugin-transform-regenerator","transform-class-properties"]
+  "plugins": ["@babel/plugin-transform-runtime","transform-class-properties"]
 }
