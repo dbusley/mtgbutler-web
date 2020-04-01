@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sn 'npm install'
+                sh 'npm install'
                 sh 'next build'
             }
         }
