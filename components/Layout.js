@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import Head from 'next/head';
 import ReactGA from 'react-ga';
+import NavBar from './NavBar';
 
 /**
  * Consistent layout through entire site
@@ -29,12 +30,13 @@ export default (props) => {
       <title>MTG Butler</title>
       <link rel={'icon'} href={'assets/favicon.png'}/>
     </Head>
+    <NavBar clientId={props.clientId}/>
     <div className="container-fluid">
       <div className="jumbotron jumbotron-fluid text-center">
         <img src={'assets/linkedin_banner_image_1.png'}
           style={{width: '320px'}}/>
       </div>
-      <div id="app">
+      <div id="app" style={{marginBottom: '60px'}}>
         {props.children}
       </div>
     </div>

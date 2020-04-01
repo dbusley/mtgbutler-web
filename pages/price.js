@@ -1,16 +1,23 @@
 import Layout from '../components/Layout';
 import React from 'react';
 import PriceChart from '../components/PriceChart';
-import fetch from 'node-fetch';
-import client from '../client';
+import {get} from '../client';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import rootReducer from '../redux/reducers';
 
-const Price = (props) => <Layout><PriceChart prices={props.prices} /></Layout>;
+const store = createStore(rootReducer);
+
+const Price = (props) => <Provider store={store}>
+  <Layout>
+    <PriceChart card={props.card} prices={props.prices}/>
+  </Layout>
+</Provider>;
 
 export async function getServerSideProps(context) {
-  const data = await client('cards', {name: context.req.query.name});
-  const linkRes = await fetch(data._embedded.cards[0]._links.prices.href);
-  const linkData = await linkRes.json();
-  return {props: {prices: linkData}};
+  const data = await get('cards', {name: context.req.query.name});
+  const linkData = await get(data._embedded.cards[0]._links.prices.href);
+  return {props: {card: data._embedded.cards[0], prices: linkData}};
 }
 
 export default Price;

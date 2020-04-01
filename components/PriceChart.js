@@ -3,7 +3,6 @@ import {
   CartesianGrid, Line, LineChart,
   Tooltip, XAxis, YAxis, ResponsiveContainer,
 } from 'recharts';
-import Router from 'next/router';
 import moment from 'moment';
 
 export default (props) => {
@@ -21,7 +20,13 @@ export default (props) => {
         moment(price.reportedDate, 'YYYY-MM-DD').toDate() -
       moment(otherPrice.reportedDate, 'YYYY-MM-DD').toDate());
   return <div className={'row justify-content-md-center'}>
-    <div className={'col-lg-6'}>
+    <div className={'col-lg-12 text-center mb-4'}>
+      <h1>{props.card.name}</h1>
+    </div>
+    <div className={'col-lg-12 text-center mx-4 mb-4'}>
+      <img className={'mx-4'} src={props.card.imageUrl} />
+    </div>
+    <div className={'col-lg-6 mb-4'}>
       <ResponsiveContainer height={300} width="100%" className={'card'}>
         <LineChart
           margin={{
@@ -36,12 +41,6 @@ export default (props) => {
             activeDot={{r: 8}}/>
         </LineChart>
       </ResponsiveContainer>
-      <div className={'text-center'}>
-        <button type={'button'} className={'btn btn-secondary my-4'}
-          onClick={() => Router.back()}>
-          Go Back
-        </button>
-      </div>
     </div>
   </div>;
 };
