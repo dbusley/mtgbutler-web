@@ -7,12 +7,12 @@ pipeline {
     agent {
         docker {
             image 'node:13'
-            args '-v $HOME/.m2:/root/.m2'
         }
     }
     stages {
         stage('build') {
             steps {
+                sn 'npm install'
                 sh 'next build'
             }
         }
