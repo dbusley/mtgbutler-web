@@ -13,7 +13,7 @@ pipeline {
         stage('build') {
             steps {
                 sh 'npm install'
-                sh 'next build'
+                sh 'npm run build'
             }
         }
         stage('publish') {
