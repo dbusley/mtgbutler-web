@@ -4,7 +4,7 @@ import {Button, ButtonGroup} from 'react-bootstrap';
 import {useDispatch} from 'react-redux';
 import allActions from '../redux/actions';
 
-export default (props) => {
+const Card = (props) => {
   const dispatch = useDispatch();
 
   const card = props.card;
@@ -38,3 +38,5 @@ export default (props) => {
   </div>;
   return cardRow;
 };
+
+export default Card;

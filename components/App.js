@@ -9,7 +9,7 @@ Sentry.init({
   dsn: 'https://51062c99acf742718df40413e67ec1da@sentry.io/5176937',
 });
 
-export default (props) => {
+const App = (props) => {
   const loading = useSelector((state) => state.loadingReducer.loading);
 
   const dispatch = useDispatch();
@@ -46,3 +46,5 @@ export default (props) => {
     <CardTable data={props.data}/>
   </div>);
 };
+
+export default App;

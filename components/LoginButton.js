@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import GoogleLogin from 'react-google-login';
 import fetch from 'node-fetch';
 
-export default (props) => {
+const LoginButton = (props) => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
@@ -40,3 +40,5 @@ export default (props) => {
   }
   return button;
 };
+
+export default LoginButton;

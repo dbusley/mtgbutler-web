@@ -5,7 +5,7 @@ import {
 } from 'recharts';
 import moment from 'moment';
 
-export default (props) => {
+const PriceChart = (props) => {
   const formatDate = (dateString) => moment(dateString, 'YYYY-MM-DD')
       .toDate().toLocaleDateString('en-US');
 
@@ -44,3 +44,5 @@ export default (props) => {
     </div>
   </div>;
 };
+
+export default PriceChart;

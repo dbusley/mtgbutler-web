@@ -1,7 +1,7 @@
 import React from 'react';
 import {Nav, Navbar} from 'react-bootstrap';
 
-export default () => {
+const NavBar = () => {
   return (<Navbar variant={'dark'} bg={'dark'} fixed={'bottom'} expand={'lg'}>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
@@ -14,3 +14,5 @@ export default () => {
     </Navbar.Collapse>
   </Navbar>);
 };
+
+export default NavBar;
