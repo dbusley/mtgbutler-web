@@ -2,16 +2,21 @@ import React, {useEffect, useState} from 'react';
 import {Nav, Navbar} from 'react-bootstrap';
 import {w3cwebsocket as W3CWebSocket} from 'websocket';
 
-const client = new W3CWebSocket('ws://' +
-  window.location.hostname + ':3001');
-
 const NavBar = () => {
+  let client;
+  if (typeof window !== 'undefined') {
+    client = new W3CWebSocket('ws://' +
+      window.location.hostname + ':3001');
+  }
+
   const [cardTicker, setCardTicker] = useState({});
 
   useEffect(() => {
-    client.onmessage = (message) => {
-      setCardTicker(JSON.parse(message.data));
-    };
+    if (client) {
+      client.onmessage = (message) => {
+        setCardTicker(JSON.parse(message.data));
+      };
+    }
   }, []);
 
   return (<Navbar variant={'dark'} bg={'dark'} fixed={'bottom'} expand={'lg'}>
