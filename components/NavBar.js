@@ -4,10 +4,10 @@ import {w3cwebsocket as W3CWebSocket} from 'websocket';
 
 const NavBar = () => {
   let client;
-  if (typeof window !== 'undefined') {
-    client = new W3CWebSocket('ws://' +
-      window.location.hostname + ':3001');
-  }
+  // if (typeof window !== 'undefined') {
+  //   client = new W3CWebSocket('ws://' +
+  //     window.location.hostname + ':3001');
+  // }
 
   const [cardTicker, setCardTicker] = useState({});
 
