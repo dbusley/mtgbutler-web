@@ -5,7 +5,8 @@ import {w3cwebsocket as W3CWebSocket} from 'websocket';
 const NavBar = () => {
   let client;
   if (typeof window !== 'undefined') {
-    client = new W3CWebSocket(window.protocol === 'https' ? 'wss://' :'ws://' +
+    client = new W3CWebSocket((window.location.protocol ===
+      'http:' ? 'ws://' : 'wss://') +
       window.location.hostname + ':3001');
   }
 
