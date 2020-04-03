@@ -2,13 +2,46 @@ import express from 'express';
 import next from 'next';
 import {get, post, put} from './client';
 import bodyParser from 'body-parser';
+import http from 'http';
+import WebSocket from 'ws';
+
+const app = express();
 
 const dev = process.env.ENV !== 'production';
 const nextApp = next({dev});
 const handle = nextApp.getRequestHandler();
 
+const server = http.createServer(app);
+const wss = new WebSocket.Server({server});
+
+wss.on('connection', (ws) => {
+  ws.on('message', (message) => {
+    console.log(message);
+    ws.send(message);
+  });
+});
+
+const interval = setInterval(async () => {
+  if (wss.clients.size > 0) {
+    const card = await get('cards/search/random');
+    wss.clients.forEach((ws) => {
+      if (card) {
+        ws.send(JSON.stringify({
+          name: card.name,
+          latestPrice: card.latestPrice,
+        }));
+      }
+    });
+  }
+}, 5000);
+
+wss.on('close', function close() {
+  clearInterval(interval);
+});
+
+server.listen(3001);
+
 nextApp.prepare().then(() => {
-  const app = express();
   app.use(bodyParser.json());
 
   app.get('/cards', async (req, res) => {

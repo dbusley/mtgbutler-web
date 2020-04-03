@@ -7,10 +7,13 @@ services:
       - api
     ports:
       - "3000:3000"
+      - "3001:3001"
     volumes:
       - ./:/usr/src/app
     environment:
       API_BASE_URL: http://api:8080/api/
+    entrypoint:
+      [ "npm", "run", "dev" ]
   api:
     image: "mtgbutler-api"
     environment:
