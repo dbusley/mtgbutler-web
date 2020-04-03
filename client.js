@@ -43,6 +43,9 @@ const get = async (url, qs) => {
   if (result.status === 404) {
     return 'NOT_FOUND';
   }
+  if (result.status > 399) {
+    return null;
+  }
   return await result.json();
 };
 
