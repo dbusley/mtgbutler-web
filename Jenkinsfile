@@ -26,6 +26,7 @@ pipeline {
                         withElasticContainerRegistry {
                             def app = docker.build("102252363609.dkr.ecr.us-east-2.amazonaws.com/mtgbutler-web")
                             app.push('latest');
+                            sh 'aws ecs update-service --cluster mtgbutler-production --service web --force-new-deployment'
                         }
                     }
                 }
