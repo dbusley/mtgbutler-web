@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node index.js",
+    "dev": "npm i nodemon -g && nodemon index.js",
     "build": "next build",
     "start": "next start"
   },
@@ -31,6 +31,7 @@
     "recharts": "^1.8.5",
     "redux": "^4.0.5",
     "regenerator-runtime": "^0.13.5",
+    "websocket": "^1.0.31",
     "ws": "^7.2.3"
   },
   "devDependencies": {

@@ -19,7 +19,24 @@ wss.on('connection', (ws) => {
     console.log(message);
     ws.send(message);
   });
-  ws.send('hi');
+});
+
+const interval = setInterval(async () => {
+  if (wss.clients.size > 0) {
+    const card = await get('cards/search/random');
+    wss.clients.forEach((ws) => {
+      if (card) {
+        ws.send(JSON.stringify({
+          name: card.name,
+          latestPrice: card.latestPrice,
+        }));
+      }
+    });
+  }
+}, 5000);
+
+wss.on('close', function close() {
+  clearInterval(interval);
 });
 
 server.listen(3001);
