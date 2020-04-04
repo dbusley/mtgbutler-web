@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {Nav, Navbar} from 'react-bootstrap';
 import {w3cwebsocket as W3CWebSocket} from 'websocket';
+import Link from 'next/link';
+
+let client;
+if (typeof window !== 'undefined') {
+  client = new W3CWebSocket((window.location.protocol ===
+    'http:' ? 'ws://' : 'wss://') +
+    window.location.hostname + ':3001');
+}
 
 const NavBar = () => {
-  let client;
-  if (typeof window !== 'undefined') {
-    client = new W3CWebSocket((window.location.protocol ===
-      'http:' ? 'ws://' : 'wss://') +
-      window.location.hostname + ':3001');
-  }
-
   const [cardTicker, setCardTicker] = useState({});
 
   useEffect(() => {
@@ -28,10 +29,11 @@ const NavBar = () => {
       </Nav>
       <Nav pullRight>
         {cardTicker.latestPrice &&
-        <span> {cardTicker.name} {new Intl.NumberFormat('en-US', {
-          style: 'currency',
-          currency: 'USD',
-        }).format(cardTicker.latestPrice)}</span>}
+        <div className={'ticker-link'}><Link href={'/price?name='+cardTicker.name}>
+          {cardTicker.name + ' ' + new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+          }).format(cardTicker.latestPrice)}</Link></div>}
       </Nav>
     </Navbar.Collapse>
   </Navbar>);
