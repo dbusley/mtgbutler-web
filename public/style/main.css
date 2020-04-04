@@ -42,3 +42,7 @@ h1 {
 body {
     background-color: #f2f3f3;
 }
+
+.ticker-link > a {
+    color: #f2f3f3!important;
+}
