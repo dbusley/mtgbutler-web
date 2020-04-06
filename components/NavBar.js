@@ -7,7 +7,8 @@ let client;
 if (typeof window !== 'undefined') {
   client = new W3CWebSocket((window.location.protocol ===
     'http:' ? 'ws://' : 'wss://') +
-    window.location.hostname + ':3001');
+    window.location.hostname + (window.location.port ? ':3001' : '') +
+    '/websocket');
 }
 
 const NavBar = () => {
@@ -29,11 +30,12 @@ const NavBar = () => {
       </Nav>
       <Nav pullRight>
         {cardTicker.latestPrice &&
-        <div className={'ticker-link'}><Link href={'/price?name='+cardTicker.name}>
-          {cardTicker.name + ' ' + new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-          }).format(cardTicker.latestPrice)}</Link></div>}
+        <div className={'ticker-link'}>
+          <Link href={'/price?name='+cardTicker.name}>
+            {cardTicker.name + ' ' + new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
+            }).format(cardTicker.latestPrice)}</Link></div>}
       </Nav>
     </Navbar.Collapse>
   </Navbar>);
