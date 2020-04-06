@@ -12,6 +12,10 @@ const handle = nextApp.getRequestHandler();
 nextApp.prepare().then(() => {
   app.use(bodyParser.json());
 
+  app.get('/health', (req, res) => {
+    res.send('healthy');
+  });
+
   app.get('/cards', async (req, res) => {
     const qs = {sort: 'name', ...req.query};
     const data = await get('cards', qs);
